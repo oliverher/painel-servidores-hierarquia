@@ -38,7 +38,7 @@ function hrow(n, d, sc, baseTot){
   const lvl = Math.min(d, 6);
   const num = v => v ? fmt(v) : '—';
   const isG = n.src === 'g' || n.src === 'r', isO = n.src === 'o' || n.src === 'n';
-  const tags = (n.src==='n' ? '<span class="tag nd">sem dados na planilha</span>' : '') + (n.src==='l' ? '<span class="tag">lotação</span>' : '') + (n.src==='x' ? '<span class="tag">fora do organograma do decreto</span>' : '') + (n.src==='p' ? '<span class="tag">departamento da folha</span>' : '');
+  const tags = (n.src==='n' ? '<span class="tag nd">sem dados na planilha</span>' : '') + (n.src==='l' ? '<span class="tag">lotação</span>' : '');
   const iso = isO && sc === ROOT && n.dn ? `<button class="iso" data-hiso="${encodeURIComponent(n.dn)}">abrir só este órgão</button>` : '';
   const exp = isO ? `<button class="iso" data-hexp="${n.id}">exportar HTML</button>` : '';
   const ownCell = (isG || isO) ? '' : num(own);
@@ -112,12 +112,12 @@ document.getElementById('bc').onclick=()=>document.querySelectorAll('details').f
 function hier(){
   const sc = hscope(); ensureOpen();
   const orgs = NODES.filter(n => n.src==='o' || n.src==='n'), withData = orgs.filter(n => n.src==='o');
-  let units = 0, withP = 0, x = 0; const walk = n => { if(n.src==='d'){ units++; if(hown(n)>0) withP++; } if(n.src==='x') x += htot(n); n.kids.forEach(walk); };
+  let units = 0, withP = 0; const walk = n => { if(n.src==='d'){ units++; if(hown(n)>0) withP++; } n.kids.forEach(walk); };
   walk(sc);
   const lab = st.mode==='s' ? 'Servidores (pessoas)' : 'Vínculos';
   const kp = sc === ROOT
-    ? [['Órgãos e entidades', fmt(orgs.length), fmt(withData.length) + ' com servidores na planilha'], [lab, fmt(htot(sc)), 'Soma de todo o estado'], ['Unidades do decreto', fmt(units), fmt(withP) + ' com servidores lotados'], ['Fora do organograma', fmt(x), pct(x, htot(sc)) + ' lotados em unidades que o decreto não detalha']]
-    : [[lab + ' no órgão', fmt(htot(sc)), 'Soma de toda a hierarquia'], ['Unidades do decreto', fmt(units), fmt(withP) + ' com servidores lotados'], ['Fora do organograma', fmt(x), pct(x, htot(sc)) + ' lotados em unidades que o decreto não detalha']];
+    ? [['Órgãos e entidades', fmt(orgs.length), fmt(withData.length) + ' com servidores na planilha'], [lab, fmt(htot(sc)), 'Soma de todo o estado'], ['Unidades do decreto', fmt(units), fmt(withP) + ' com servidores lotados']]
+    : [[lab + ' no órgão', fmt(htot(sc)), 'Soma de toda a hierarquia'], ['Unidades do decreto', fmt(units), fmt(withP) + ' com servidores lotados']];
   return `<div><p class="kicker">Hierarquia</p><h1 class="h1">${sc===ROOT ? 'Servidores por unidade, órgão por órgão' : esc(sc.n)}</h1>
   <p class="lead">Cada unidade aparece dentro da unidade a que está subordinada no Decreto 10.218, Anexo I. O número da direita soma a unidade com tudo o que está abaixo dela.${sc!==ROOT ? ' <button class="link" data-hall0="1">Ver todo o estado</button> · <button class="link" data-lista="' + encodeURIComponent(st.horg) + '">Ver como lista plana</button>' : ''}</p></div>
   ${kpis(kp)}
