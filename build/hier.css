@@ -1,0 +1,43 @@
+
+/* ---------- hierarquia ---------- */
+.tree{padding:6px 0 10px}
+.hhead{display:grid;grid-template-columns:minmax(0,1fr) 120px 92px 118px;gap:14px;padding:8px 20px;font-size:11.5px;font-weight:600;color:var(--ink-soft);border-bottom:1px solid var(--line);background:var(--paper-soft)}
+.hhead span:nth-child(n+3){text-align:right}
+.hr{display:grid;grid-template-columns:minmax(0,1fr) 120px 92px 118px;gap:14px;align-items:center;padding:5px 20px;border-bottom:1px solid rgba(20,40,42,.07)}
+.hr:hover{background:var(--paper)}
+.hl{display:flex;align-items:center;gap:6px;min-width:0;flex-wrap:wrap}
+.tg{flex:none;width:22px;height:22px;border:1px solid var(--line);background:var(--paper);border-radius:2px;cursor:pointer;font-size:13px;line-height:1;color:var(--ink);padding:0}
+.tg:hover{background:var(--paper-dark)}
+.tg.sp{visibility:hidden;display:inline-block}
+.hn{font-weight:700;overflow-wrap:anywhere;line-height:1.25}
+.hn.t0{font-size:22px;font-family:var(--f-serif)}.hn.t1{font-size:19px;font-family:var(--f-serif)}.hn.t2{font-size:17px}.hn.t3{font-size:15.5px}.hn.t4{font-size:14.5px}.hn.t5{font-size:13.5px}.hn.t6{font-size:13px}
+.tag{font-weight:500;font-size:11px;color:var(--ink-soft);border:1px solid var(--line);border-radius:10px;padding:1px 7px;white-space:nowrap}
+.tag.nd{color:var(--alert);border-color:var(--alert)}
+.iso{background:none;border:0;color:var(--trust);font-size:12px;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0 2px;white-space:nowrap}
+.hb{height:8px;background:var(--paper-dark);border-radius:1px;overflow:hidden}
+.hb i{display:block;height:100%;background:var(--trust)}
+.hc{font-variant-numeric:tabular-nums;text-align:right;font-weight:700;font-size:14.5px}
+.hc.z{color:var(--ink-soft);font-weight:400}
+.hc.sub{font-weight:600;color:var(--trust)}
+.hr.t0 .hc{font-size:17px}.hr.t1 .hc{font-size:16px}
+.hr.g0{background:var(--ink);color:var(--paper-soft)}
+.hr.g0 .tg{background:var(--ink-3);border-color:var(--line-ink);color:var(--paper-soft)}
+.hr.g0 .hc.sub,.hr.g0 .hc{color:var(--seal-light)}
+.hr.g0 .hb{background:var(--ink-3)}.hr.g0 .hb i{background:var(--seal-light)}
+.hr.g0:hover{background:var(--ink-2)}
+mark{background:#f3de9c;color:inherit;padding:0 1px;border-radius:2px}
+.hbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line)}
+.hbar input[type=search]{flex:1 1 240px;min-width:0;font:inherit;padding:9px 12px;border:1px solid var(--ink);border-radius:2px;background:#fff;color:var(--ink)}
+.clr2{background:none;border:1px solid var(--ink);border-radius:2px;padding:8px 12px;font-size:13px;font-weight:500;cursor:pointer}
+.clr2:hover{background:var(--paper-dark)}
+@media (max-width:900px){
+  .hhead{display:none}
+  .hr{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 12px;padding:8px 14px}
+  .hr .hb{display:none}
+  .hr .hl{grid-column:1 / -1}
+  .hr .hc.own::before{content:"Na unidade ";font-weight:400;font-size:11px;color:var(--ink-soft)}
+  .hr .hc.sub::before{content:"Com subordinadas ";font-weight:400;font-size:11px;color:var(--ink-soft)}
+  .hr .hc{text-align:left}
+  .hr .hc:empty{display:none}
+  .hbar{padding:12px 14px}
+}
