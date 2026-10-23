@@ -1,0 +1,16 @@
+
+/* ---------- chat ---------- */
+.cex{display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px;border-bottom:1px solid var(--line)}
+.clog{max-height:360px;overflow:auto;padding:12px 20px;display:flex;flex-direction:column;gap:8px}
+.cq{align-self:flex-end;background:var(--ink);color:var(--paper-soft);border-radius:12px 12px 2px 12px;padding:8px 13px;font-size:14px;max-width:85%}
+.ca{align-self:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:12px 12px 12px 2px;padding:10px 14px;font-size:14px;line-height:1.5;max-width:100%;overflow-wrap:anywhere}
+.ca small{color:var(--ink-soft)}
+.ctab{margin-top:8px;border-top:1px solid var(--line)}
+.crow{display:flex;justify-content:space-between;gap:14px;padding:6px 0;border-bottom:1px solid rgba(20,40,42,.08)}
+.crow .cn{white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums;color:var(--trust)}
+.crow .hb{margin-top:4px;max-width:260px}
+.cform{display:flex;gap:10px;padding:12px 20px 16px;border-top:1px solid var(--line)}
+.cform input{flex:1;min-width:0;font:inherit;padding:10px 12px;border:1px solid var(--ink);border-radius:2px;background:#fff;color:var(--ink)}
+.hr.flash{animation:fl 2.5s ease-out}
+@keyframes fl{0%,60%{background:#f3de9c}100%{background:transparent}}
+@media (max-width:900px){.cex,.clog,.cform{padding-left:14px;padding-right:14px}.cq{max-width:95%}}

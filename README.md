@@ -3,7 +3,7 @@
 Painel estático com a quantidade de servidores do Poder Executivo de Goiás por unidade, na hierarquia do Decreto 10.218 (Anexo I, sem as linhas extintas).
 
 - Folha de setembro de 2026, sem nomes de servidores e sem valores de remuneração.
-- Visão por órgão, busca, alternância entre pessoas e vínculos, exportação em CSV e exportação de cada órgão em HTML.
+- Visão por órgão, busca, alternância entre pessoas e vínculos, exportação em CSV e exportação de cada órgão em HTML e um chat em linguagem natural (interpretado no navegador, sem API externa).
 - Site: `index.html` (publicado com GitHub Pages).
 
 ## Como regenerar

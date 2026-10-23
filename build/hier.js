@@ -43,7 +43,7 @@ function hrow(n, d, sc, baseTot){
   const exp = isO ? `<button class="iso" data-hexp="${n.id}">exportar HTML</button>` : '';
   const ownCell = (isG || isO) ? '' : num(own);
   const subCell = (has || isG) ? num(tot) : '';
-  return `<div class="hr t${lvl}${isG?' g0':''}"><div class="hl" style="padding-left:${d*22}px">${has?`<button class="tg" data-t="${n.id}" aria-expanded="${open}" aria-label="${open?'Recolher':'Expandir'} ${esc(n.n)}">${open?'−':'+'}</button>`:'<span class="tg sp"></span>'}<span class="hn t${lvl}">${hl(n.n)}</span>${tags}${iso}${exp}</div>
+  return `<div class="hr t${lvl}${isG?' g0':''}" data-nid="${n.id}"><div class="hl" style="padding-left:${d*22}px">${has?`<button class="tg" data-t="${n.id}" aria-expanded="${open}" aria-label="${open?'Recolher':'Expandir'} ${esc(n.n)}">${open?'−':'+'}</button>`:'<span class="tg sp"></span>'}<span class="hn t${lvl}">${hl(n.n)}</span>${tags}${iso}${exp}</div>
     <div class="hb"><i style="width:${baseTot?Math.max(tot?1:0,tot/baseTot*100):0}%"></i></div>
     <div class="hc own${own?'':' z'}">${ownCell}</div>
     <div class="hc sub${tot?'':' z'}">${subCell}</div></div>`;
@@ -121,6 +121,7 @@ function hier(){
   return `<div><p class="kicker">Hierarquia</p><h1 class="h1">${sc===ROOT ? 'Servidores por unidade, órgão por órgão' : esc(sc.n)}</h1>
   <p class="lead">Cada unidade aparece dentro da unidade a que está subordinada no Decreto 10.218, Anexo I. O número da direita soma a unidade com tudo o que está abaixo dela.${sc!==ROOT ? ' <button class="link" data-hall0="1">Ver todo o estado</button> · <button class="link" data-lista="' + encodeURIComponent(st.horg) + '">Ver como lista plana</button>' : ''}</p></div>
   ${kpis(kp)}
+  ${chatHtml()}
   <section class="panel">
     <div class="hbar">
       <input type="search" id="hq" placeholder="Buscar unidade na hierarquia" value="${esc(st.hq)}" aria-label="Buscar unidade na hierarquia">

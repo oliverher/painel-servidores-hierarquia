@@ -6,8 +6,8 @@ def rep(old,new,count=1):
     assert src.count(old)>=1,old[:60]
     src=src.replace(old,new,count)
 
-CSS=open('hier.css',encoding='utf-8').read()
-JS=open('hier.js',encoding='utf-8').read()
+CSS=open('hier.css',encoding='utf-8').read()+open('chat.css',encoding='utf-8').read()
+JS=open('hier.js',encoding='utf-8').read()+open('chat.js',encoding='utf-8').read()
 rep('</style>',CSS+'</style>')
 rep('const $ = id =>','const H = '+H+';\nconst $ = id =>')
 

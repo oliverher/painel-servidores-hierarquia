@@ -15,6 +15,7 @@ def short(n):  # tira sigla e "(Regulamento)" do nome do órgão
     return n
 for o in orgs:
     o['full']=short(o['name'])
+    if 'DGPP' in o['full']:o['full']='Diretoria-Geral de Polícia Penal – DGPP'
     m=re.match(r'^(.*?)\s*[–-]\s*([A-ZÁÂÃÉÊÍÓÔÕÚÇ ]{2,}[A-Z]|[A-Z ]+)\s*$',o['full'])
     o['label']=o['full']
 # acrescenta Conselho de Governo e Governadoria
