@@ -106,7 +106,19 @@ for oname,g in df.groupby('Órgão'):
             if key not in synth:
                 synth[key]=mk(un,'lotacao');d['kids'].append(synth[key])
             synth[key]['own']|=ids;synth[key]['ownr']+=len(gg);stats[oname][1]+=len(ids);continue
-        stats[oname][2]+=len(ids)  # descartado: inativa ou sem correspondência no decreto
+        if grp is None:
+            grp=mk('Lotações sem correspondência no organograma do decreto','semcorresp');o['tree'].append(grp);grp_d={}
+        if special or norm(dp)==norm(un) or dp=='nan':
+            key=norm(un);parent=grp
+        else:
+            key='D'+norm(dp)
+            if key not in grp_d:
+                grp_d[key]=mk(dp,'dept');grp['kids'].append(grp_d[key])
+            parent=grp_d[key]
+        kk=(id(parent),norm(un))
+        if kk not in synth:synth[kk]=mk(un,'lotacao');parent['kids'].append(synth[kk])
+        synth[kk]['own']|=ids;synth[kk]['ownr']+=len(gg);stats[oname][2]+=len(ids)
+
 def total(n):
     s=set(n['own']);r=n['ownr']
     for k in n['kids']:
@@ -131,7 +143,8 @@ for o in direct:
         nd['kids']=list(o['tree'])+[orgnode(x) for x in sub]
     nodes_direct.append(nd)
 nodes_ind=[orgnode(o) for o in orgs if o['sec']=='II']
-groups=[('Administração direta',nodes_direct),('Administração autárquica e fundacional',nodes_ind)]
+nodes_out=[orgnode(o) for o in extra]
+groups=[('Administração direta',nodes_direct),('Administração autárquica e fundacional',nodes_ind),('Entidades com servidores na folha, fora do Anexo I do decreto',nodes_out)]
 root={'name':'Governo de Goiás','kids':[],'own':set(),'ownr':0,'src':'root'}
 for gname,ns in groups:
     root['kids'].append({'name':gname,'kids':ns,'own':set(),'ownr':0,'src':'group'})
