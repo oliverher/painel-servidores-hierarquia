@@ -14,3 +14,5 @@
 .hr.flash{animation:fl 2.5s ease-out}
 @keyframes fl{0%,60%{background:#f3de9c}100%{background:transparent}}
 @media (max-width:900px){.cex,.clog,.cform{padding-left:14px;padding-right:14px}.cq{max-width:95%}}
+
+.cfoot{padding:0 20px 14px;font-size:12px;color:var(--ink-soft)}
