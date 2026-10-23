@@ -32,6 +32,29 @@ def build(o):
     return nodes
 for o in orgs:o['tree']=build(o)
 
+def promover(o):
+    """No decreto tudo vem numerado dentro do Gabinete; no organograma subsecretarias, superintendências e diretorias ficam ao lado dele."""
+    if o['sec']=='I' and o['id'] in ('q.1','q.2','q.3','q.4','q.5','aa') or o['sec']=='II': amplo=True
+    else: amplo=False
+    amplo = o['sec']=='II' or o['id'].startswith('q.')
+    def eh(n):
+        nm=norm(n['name'])
+        if nm.startswith(('SUBSECRETARIA','SUPERINTENDENCIA','DIRETORIA EXECUTIVA','VICE PRESIDENTE','SECRETARIA EXECUTIVA')): return True
+        if amplo and nm.startswith('DIRETORIA'): return True
+        if o['id']=='j' and o['sec']=='I' and nm.startswith(('PROCURADORIA ESPECIALIZADA','PROCURADORIA NA CAPITAL')): return True
+        return False
+    novo=[]
+    if o['sec']=='I' and o['id']=='o': amplo=True
+    for n in o['tree']:
+        novo.append(n)
+        if n['name'].lower().startswith('gabinete'):
+            for g in [n]+[k for k in n['kids'] if k['name'].lower().startswith('gabinete')]:
+                subir=[k for k in g['kids'] if eh(k)]
+                g['kids']=[k for k in g['kids'] if k not in subir]
+                novo+=subir
+    o['tree']=novo
+for o in orgs:promover(o)
+
 STOP={'DE','DA','DO','DOS','DAS','E','EM','A','O'}
 def key2(x):return ' '.join(t for t in norm(x).split() if t not in STOP)
 MAP={'AGENCIA BRASIL CENTRAL':('II','a'),'AGENCIA GOIANA DE ASSISTENCIA TECNICA EXTENSAO RURAL E PESQUISA AGROPECUARIA':('II','c'),
